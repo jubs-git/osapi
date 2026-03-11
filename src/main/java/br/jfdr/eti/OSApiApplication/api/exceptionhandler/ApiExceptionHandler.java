@@ -10,6 +10,8 @@ import java.util.List;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
@@ -32,7 +34,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler{
         
         List<PoblemaException.CampoProblema> camposComErro = new ArrayList<PoblemaException.CampoProblema>();
         
-        for (ObjetctError error : ex.getBindingResult().getAllErrors()) {
+        for (ObjectError error : ex.getBindingResult().getAllErrors()) {
             String nomeCampo = ((FieldError) error).getField();
             String mensagemCampo = error.getDefaultMessage();
             
