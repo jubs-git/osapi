@@ -6,6 +6,7 @@ package br.jfdr.eti.OSApiApplication.api.controller;
 
 import br.jfdr.eti.OSApiApplication.domain.model.Cliente;
 import br.jfdr.eti.OSApiApplication.domain.repository.ClienteRepository;
+import br.jfdr.eti.OSApiApplication.domain.service.ClienteService;
 import jakarta.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -32,6 +33,9 @@ public class ClienteController {
    @Autowired
    private ClienteRepository clienteRepository;
    
+   @Autowired
+   private ClienteService clienteService;
+   
    @GetMapping("/clientes")
    public List<Cliente> listas() {
        return clienteRepository.findAll();
@@ -55,7 +59,7 @@ public class ClienteController {
    @ResponseStatus(HttpStatus.CREATED)
    public Cliente adicionar(@Valid @RequestBody Cliente cliente) {
        
-       return clienteRepository.save(cliente);
+       return clienteService.salvar(cliente);
    }
    @PutMapping("/clientes/{clienteID}")
    public ResponseEntity<Cliente> atualizar( @Valid @PathVariable Long clienteID,
@@ -63,9 +67,11 @@ public class ClienteController {
        if (!clienteRepository.existsById(clienteID)) {
            return ResponseEntity.notFound().build();
        }
+       
        cliente.setId(clienteID);
-       cliente = clienteRepository.save(cliente);
+       cliente = clienteService.salvar(cliente);
        return ResponseEntity.ok(cliente);
+       
    }
    @DeleteMapping("/cliente/{clienteID}")
    public ResponseEntity<Void> excluir(@PathVariable Long clienteID) {
@@ -74,7 +80,7 @@ public class ClienteController {
            return ResponseEntity.notFound().build();
        }
        
-       clienteRepository.deleteById(clienteID);
+       clienteService.excluir(clienteID);
        return ResponseEntity.noContent().build();
    }
    

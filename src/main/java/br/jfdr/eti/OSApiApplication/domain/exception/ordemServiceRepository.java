@@ -8,11 +8,6 @@ package br.jfdr.eti.OSApiApplication.domain.exception;
  *
  * @author sesi3dia
  */
-public class DomainException extends RuntimeException {
-   
-    private static final long serialVersionUID = 1L;
+class ordemServiceRepository {
     
-    public DomainException(String message) {
-        super (message);
-    }
 }

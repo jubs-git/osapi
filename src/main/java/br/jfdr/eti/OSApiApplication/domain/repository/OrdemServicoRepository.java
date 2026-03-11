@@ -4,20 +4,15 @@
  */
 package br.jfdr.eti.OSApiApplication.domain.repository;
 
-import br.jfdr.eti.OSApiApplication.domain.model.Cliente;
+import br.jfdr.eti.OSApiApplication.domain.model.OrdemServico;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author sesi3dia
  */
-@Repository
-public interface ClienteRepository extends JpaRepository<Cliente, Long> {
-    
-    List<Cliente> findByNome(String nome);
-    List<Cliente> findByNomeContaining(String nome);
-    Cliente findByEmail(String email);
+public interface OrdemServicoRepository extends JpaRepository<OrdemServico, Long> {
+   List<OrdemServico> findByClienteId(Long clienteId); 
     
 }

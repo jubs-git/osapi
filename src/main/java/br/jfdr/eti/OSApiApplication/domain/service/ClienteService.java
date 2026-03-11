@@ -19,7 +19,7 @@ public class ClienteService {
     @Autowired
     private ClienteRepository clienteRepository;
     
-    private Cliente salvar(Cliente cliente) {
+    public Cliente salvar(Cliente cliente) {
         Cliente clienteExistente = clienteRepository.findByEmail(cliente.getEmail());
         
         if (clienteExistente != null && !clienteExistente.equals(cliente)) {
